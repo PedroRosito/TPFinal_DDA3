@@ -1,4 +1,5 @@
-const mqtt = require('mqtt');
+var mqtt = require('mqtt');
+var postgreClient = require('../postgreSQL/postgreHandler')
 
 class MqttHandler {
   constructor() {
@@ -26,6 +27,13 @@ class MqttHandler {
 
     this.mqttClient.on('message', function (topic, message) {
       console.log(message.toString());
+      if(topic == 'esp32/dht/temperature'){
+        console.log("mensaje de temperatura");
+      }
+      else{
+          console.log("mensaje de humedad");
+      }
+      
     });
 
     this.mqttClient.on('close', () => {
