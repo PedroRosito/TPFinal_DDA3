@@ -1,5 +1,5 @@
 var express = require('express');
-var sensorRouter = express.Router();
+var tempMeasure_router = express.Router();
 var postgreClient = require('../postgreSQL/postgreHandler');
 
 router.get('/:id', function(req, res, next) {
@@ -10,4 +10,4 @@ router.get('/:id', function(req, res, next) {
   );
 });
 
-module.exports = sensorRouter;
+module.exports = tempMeasure_router;
