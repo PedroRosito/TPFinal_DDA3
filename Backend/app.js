@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mqttHandler = require('./mqtt/mqttHandler');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/sensor');
 
 var mqttClient = new mqttHandler();
 
@@ -45,6 +45,6 @@ app.use(function(err, req, res, next) {
 
 app.listen(3000, function(req,res){
   console.log('api abierta en el puerto 3000');
-})
+});
 
 module.exports = app;
