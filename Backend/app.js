@@ -43,4 +43,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(3000, function(req,res){
+  console.log('api abierta en el puerto 3000');
+})
+
 module.exports = app;
