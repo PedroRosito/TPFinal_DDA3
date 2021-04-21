@@ -4,7 +4,7 @@ var postgreClient = require('../postgreSQL/postgreHandler');
 class MqttHandler {
   constructor() {
     this.mqttClient = null;
-    this.host = 'HOST';
+    this.host = 'mqtt://192.168.100.25';
     this.username = 'USER';
     this.password = 'PASSWORD';
   }
