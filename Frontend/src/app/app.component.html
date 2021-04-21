@@ -1,2 +1,45 @@
-<router-outlet></router-outlet>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Frontend</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation bar -->
+  <nav style="background-color:#f19010">
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Estacion meteorologica</a>
+       
+        <ul id="nav-mobile" class="right" style="margin-right: 15px;">
+            <li class="active">
+                <a href="http://localhost:4200">Sensor</a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+<!-- Cuerpo efectivo de la pagina -->
+  <div id="todo"> 
+		<div class="container">
+            <a id="Control LED"></a>
+            <h4>Control del LED</h4>
+             <!-- Boton -->
+             <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>LED</a>
+    </div>
+    <br/>
+    <br/>
+  </div>
+
+<!--Grafico-->
 <app-line-chart></app-line-chart>
+</body>
+</html>
+
+
+
+<router-outlet></router-outlet>
