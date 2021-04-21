@@ -29,9 +29,13 @@ extern "C" {
 // Temperature MQTT Topics
 #define MQTT_PUB_TEMP "esp32/dht/temperature"
 #define MQTT_PUB_HUM  "esp32/dht/humidity"
+#define MQTT_SUB_LED "esp32/led/set"
 
 // Digital pin connected to the DHT sensor
 #define DHTPIN 4  
+
+//LED pin
+#define LED_ONBOARD 2
 
 // Uncomment whatever DHT sensor type you're using
 //define DHTTYPE DHT11   // DHT 11
@@ -81,6 +85,7 @@ void WiFiEvent(WiFiEvent_t event) {
 
 void onMqttConnect(bool sessionPresent) {
   Serial.println("Connected to MQTT.");
+  mqttClient.subscribe(MQTT_SUB_LED);
   Serial.print("Session present: ");
   Serial.println(sessionPresent);
 }
@@ -90,6 +95,23 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
   if (WiFi.isConnected()) {
     xTimerStart(mqttReconnectTimer, 0);
   }
+}
+
+void Mqtt_MessageCallback(char* topic, char* payload){
+        // Compare the topic payload to expected values
+        if( (strcmp((char *)payload, "on") == 0) || (strcmp((char *)payload, "off") == 0) ){
+            bool status = false;
+            // set the LED status depending on the payload
+            if(strcmp((char *)payload, "on") == 0){
+                status = true;
+            } 
+            digitalWrite(LED_ONBOARD, status);
+            // Report the action in console
+            Serial.print("Changing the LED status to: ");
+            Serial.println(status);
+        } else {
+            Serial.println("Invalid LED status. It must be 'on' or 'off'.");
+        }
 }
 
 /*void onMqttSubscribe(uint16_t packetId, uint8_t qos) {
@@ -124,6 +146,7 @@ void setup() {
 
   mqttClient.onConnect(onMqttConnect);
   mqttClient.onDisconnect(onMqttDisconnect);
+  mqttClient.onMessage(Mqtt_MessageCallback)
   //mqttClient.onSubscribe(onMqttSubscribe);
   //mqttClient.onUnsubscribe(onMqttUnsubscribe);
   mqttClient.onPublish(onMqttPublish);
