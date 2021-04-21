@@ -29,7 +29,7 @@
             <a id="Control LED"></a>
             <h4>Control del LED</h4>
              <!-- Boton -->
-             <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>LED</a>
+             <button (click)="mqttPublish()" mat-button color="primary">{{this.ledState}}</button>
     </div>
     <br/>
     <br/>

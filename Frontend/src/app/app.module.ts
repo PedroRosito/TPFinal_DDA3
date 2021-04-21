@@ -8,10 +8,10 @@ import { ChartsModule } from 'ng2-charts';
 import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'http://192.168.xxx.xxx',
-  port: 1883,
-  protocol: "wss",
-  path: '',
+  hostname: '192.168.100.25',
+  port: 9001,
+  protocol: "ws",
+  path: '/mqtt',
 };
 
 @NgModule({

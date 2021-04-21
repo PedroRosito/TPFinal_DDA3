@@ -11,11 +11,23 @@ export class AppComponent {
   title = 'Frontend';
 
   private options: IPublishOptions = {qos:1};
+  public ledState:string="off";
+
 
   constructor(private mqttService: MqttService){}
 
-  mqttPublish(message:string){
-    this.mqttService.publish("esp32/led/set",message,this.options);
+  mqttPublish(){
+
+    this.mqttService.publish("esp32/led/set",this.ledState,this.options).toPromise().then(
+      (result)=>console.log(result)
+    ).catch(
+      (error)=>console.log(error)
+    );
+    if (this.ledState == 'off'){
+      this.ledState = 'on'
+    } else {
+      this.ledState = 'off'
+    }
   }
 
 }
