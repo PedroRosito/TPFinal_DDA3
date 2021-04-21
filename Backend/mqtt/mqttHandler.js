@@ -29,12 +29,12 @@ class MqttHandler {
       console.log(message.toString());
       if(topic == 'esp32/dht/temperature'){
         console.log("mensaje de temperatura");
-        postgreClient.query('INSERT INTO temperatura (valor) VALUES ($1)',[Number(message)]).then(
+        postgreClient.query('INSERT INTO temperatureMeasure (valor) VALUES ($1)',[Number(message)]).then(
         (response)=>{console.log(response)});
       }
       else{
         console.log("mensaje de humedad");
-        postgreClient.query('INSERT INTO humedad (valor) VALUES ($1)',[Number(message)]).then(
+        postgreClient.query('INSERT INTO humidityMeasure (valor) VALUES ($1)',[Number(message)]).then(
         (response)=>{console.log(response)});
       }
       

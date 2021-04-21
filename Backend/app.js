@@ -6,7 +6,9 @@ var logger = require('morgan');
 var mqttHandler = require('./mqtt/mqttHandler');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/sensor');
+var sensorRouter = require('./routes/sensor');
+var humidityRouter = require('./routes/humidityMeasure');
+var temperatureRouter = require('./routes/temperatureMeasure');
 
 var mqttClient = new mqttHandler();
 
@@ -25,7 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/sensor', sensorRouter);
+app.use('/humidity',humidityRouter);
+app.use('/temperature',temperatureRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

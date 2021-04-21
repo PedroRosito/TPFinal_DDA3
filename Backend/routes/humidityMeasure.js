@@ -2,8 +2,8 @@ var express = require('express');
 var humMeasure_router = express.Router();
 var postgreClient = require('../postgreSQL/postgreHandler');
 
-router.get('/:id', function(req, res, next) {
-  postgreClient.query("SELECT * FROM humidityMeasure WHERE id=?",[Number(id)]).then(
+humMeasure_router.get('/:id', function(req, res, next) {
+  postgreClient.query("SELECT * FROM humidityMeasure WHERE id_sensor=?",[Number(id)]).then(
     (response)=>res.send(response)
   ).catch(
     (err)=>res.send(err)
