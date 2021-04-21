@@ -85,7 +85,7 @@ void WiFiEvent(WiFiEvent_t event) {
 
 void onMqttConnect(bool sessionPresent) {
   Serial.println("Connected to MQTT.");
-  mqttClient.subscribe(MQTT_SUB_LED);
+  mqttClient.subscribe(MQTT_SUB_LED,1);
   Serial.print("Session present: ");
   Serial.println(sessionPresent);
 }
@@ -97,7 +97,7 @@ void onMqttDisconnect(AsyncMqttClientDisconnectReason reason) {
   }
 }
 
-void Mqtt_MessageCallback(char* topic, char* payload){
+void Mqtt_MessageCallback(char* topic, char* payload, AsyncMqttClientMessageProperties propertie, unsigned int len, unsigned int index, unsigned int total){
         // Compare the topic payload to expected values
         if( (strcmp((char *)payload, "on") == 0) || (strcmp((char *)payload, "off") == 0) ){
             bool status = false;
@@ -146,7 +146,7 @@ void setup() {
 
   mqttClient.onConnect(onMqttConnect);
   mqttClient.onDisconnect(onMqttDisconnect);
-  mqttClient.onMessage(Mqtt_MessageCallback)
+  mqttClient.onMessage(Mqtt_MessageCallback);
   //mqttClient.onSubscribe(onMqttSubscribe);
   //mqttClient.onUnsubscribe(onMqttUnsubscribe);
   mqttClient.onPublish(onMqttPublish);
