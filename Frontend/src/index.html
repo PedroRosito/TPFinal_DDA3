@@ -6,8 +6,44 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+<!-- Navigation bar -->
+  <nav style="background-color:#f19010">
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Estacion meteorologica</a>
+       
+        <ul id="nav-mobile" class="right" style="margin-right: 15px;">
+            <li class="active">
+                <a href="http://localhost:4200">Sensor</a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+<!-- Cuerpo efectivo de la pagina -->
+  <div id="todo"> 
+		<div class="container">
+            <a id="Control LED"></a>
+            <h4>Control del LED</h4>
+             <!-- Switch -->
+            <div class="switch">
+              <label>
+              Off
+              <input type="checkbox">
+              <span class="lever"></span>
+              On
+              </label>
+            </div>
+    </div>
+    <br/>
+    <br/>
+  </div>
+
+<!--Grafico-->
   <app-root></app-root>
 </body>
 </html>
+
