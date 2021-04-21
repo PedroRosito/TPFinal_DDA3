@@ -4,7 +4,7 @@ var postgreClient = require('../postgreSQL/postgreHandler');
 class MqttHandler {
   constructor() {
     this.mqttClient = null;
-    this.host = 'HOST';
+    this.host = 'mqtt://192.168.100.25';
     this.username = 'USER';
     this.password = 'PASSWORD';
   }
@@ -29,12 +29,12 @@ class MqttHandler {
       console.log(message.toString());
       if(topic == 'esp32/dht/temperature'){
         console.log("mensaje de temperatura");
-        postgreClient.query('INSERT INTO temperatura (valor) VALUES ($1)',[Number(message)]).then(
+        postgreClient.query('INSERT INTO temperaturemeasure (value, id_sensor) VALUES ($1,$2)',[Number(message),1]).then(
         (response)=>{console.log(response)});
       }
       else{
         console.log("mensaje de humedad");
-        postgreClient.query('INSERT INTO humedad (valor) VALUES ($1)',[Number(message)]).then(
+        postgreClient.query('INSERT INTO humiditymeasure (value, id_sensor) VALUES ($1,$2)',[Number(message),1]).then(
         (response)=>{console.log(response)});
       }
       
