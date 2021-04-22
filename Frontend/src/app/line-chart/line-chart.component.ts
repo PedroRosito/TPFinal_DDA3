@@ -62,24 +62,11 @@ export class LineChartComponent implements OnInit{
       (data)=>{
        // this.lineChartData[0].data.push(data.valor)
        var length = data['rows'].length;
-       console.log(data);
        this.lineChartData[0].label = 'Temperatura'; 
        for(let i=0; i<length; i++){
-        var time = data['rows'][i]['timestamp'].split('T');
-        var hours = time[1].split('.');
-        var minutes = hours[0].split(':');
-        if (minutes[0] == '02'){
-          minutes[0] = '23';
-        } else if (minutes[0] == '01'){
-          minutes[0] = '22';
-        } else if (minutes[0] == '00') {
-          minutes[0] = '21';
-        } else {
-          minutes[0] = String(Number(minutes[0])-3);
-        }
-        minutes[0] = minutes[0] + ':' + minutes[1] + ':' + minutes[2]; 
+        var timeCorrect:string = this.correctTime(data['rows'][i]['timestamp']);
         this.lineChartData[0].data.push(Number(data['rows'][i]['value']));
-        this.lineChartLabels.push(minutes[0]);
+        this.lineChartLabels.push(timeCorrect);
         console.log(data['rows'][i]['value']);
        }
       }
@@ -94,24 +81,11 @@ export class LineChartComponent implements OnInit{
       (data)=>{
        // this.lineChartData[0].data.push(data.valor)
        var length = data['rows'].length;
-       console.log(data);
        this.lineChartData[0].label = 'Humedad';
        for(let i=0; i<length; i++){
-        var time = data['rows'][i]['timestamp'].split('T');
-        var hours = time[1].split('.');
-        var minutes = hours[0].split(':');
-        if (minutes[0] == '02'){
-          minutes[0] = '23';
-        } else if (minutes[0] == '01'){
-          minutes[0] = '22';
-        } else if (minutes[0] == '00') {
-          minutes[0] = '21';
-        } else {
-          minutes[0] = String(Number(minutes[0])-3);
-        }
-        minutes[0] = minutes[0] + ':' + minutes[1] + ':' + minutes[2]; 
+        var timeCorrect:string = this.correctTime(data['rows'][i]['timestamp']);
         this.lineChartData[0].data.push(Number(data['rows'][i]['value']));
-        this.lineChartLabels.push(minutes[0]);
+        this.lineChartLabels.push(timeCorrect);
         console.log(data['rows'][i]['value']);
        }
       }
@@ -133,6 +107,23 @@ export class LineChartComponent implements OnInit{
   showHum(){
     console.log("Pedi la humedad");
     this.updateHumData();
+  }
+
+  correctTime(timestamp:string){
+    var time = timestamp.split('T');
+    var hours = time[1].split('.');
+    var minutes = hours[0].split(':');
+    if (minutes[0] == '02'){
+      minutes[0] = '23';
+    } else if (minutes[0] == '01'){
+      minutes[0] = '22';
+    } else if (minutes[0] == '00') {
+      minutes[0] = '21';
+    } else {
+      minutes[0] = String(Number(minutes[0])-3);
+    }
+    minutes[0] = minutes[0] + ':' + minutes[1] + ':' + minutes[2]; 
+    return minutes[0];
   }
 
   
