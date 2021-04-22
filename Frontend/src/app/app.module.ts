@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { IMqttServiceOptions, MqttModule } from "ngx-mqtt";
+import { HttpClientModule } from '@angular/common/http';
 
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: '192.168.100.25',
@@ -23,6 +24,7 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
+    HttpClientModule,
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
   ],
   providers: [],

@@ -1,6 +1,7 @@
-import { Component, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { TemperaturaService } from '../services/temperatura.service'
 
 @Component({
   selector: 'app-line-chart',
@@ -8,13 +9,19 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./line-chart.component.css']
 })
 
-export class LineChartComponent {
+export class LineChartComponent implements OnInit{
+
+  constructor(private temperatura:TemperaturaService){}
+
+  ngOnInit(){
+    this.updateData()
+  }
 
   lineChartData: ChartDataSets[] = [
-    { data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
+    { data: [], label: 'Temperatura' },
   ];
 
-  lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June'];
+  lineChartLabels: Label[] = [];
 
   lineChartOptions = {
     responsive: true,
@@ -30,5 +37,20 @@ export class LineChartComponent {
   lineChartLegend = true;
   lineChartPlugins = [];
   lineChartType = 'line';
+
+  updateData(){
+    console.log('Estoy en updateData');
+    this.temperatura.getData().subscribe(
+      (data)=>{
+       // this.lineChartData[0].data.push(data.valor)
+       var length = data['rows'].length;
+       for(let i=0; i<length; i++){
+        this.lineChartData[0].data.push(Number(data['rows'][i]['valor']));
+        this.lineChartLabels.push('' + i);
+        console.log(data['rows'][i]['valor']);
+       }
+      }
+    )
+  }  
   
 }
