@@ -29,7 +29,7 @@
             <a id="Control LED"></a>
             <h4>Control del LED</h4>
              <!-- Boton -->
-             <button (click)="mqttPublish()" mat-button color="primary">{{this.ledState}}</button>
+             <button (click)="mqttPublish('on')" mat-button color="primary">{{this.ledState}}</button>
     </div>
     <br/>
     <br/>
