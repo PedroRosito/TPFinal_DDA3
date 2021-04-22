@@ -3,12 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 var mqttHandler = require('./mqtt/mqttHandler');
 
 var indexRouter = require('./routes/index');
 var sensorRouter = require('./routes/sensor');
 var humidityRouter = require('./routes/humidityMeasure');
 var temperatureRouter = require('./routes/temperatureMeasure');
+var corsOptions={
+  "Access-Control-Allow-Origin":"*"
+}
 
 var mqttClient = new mqttHandler();
 
@@ -20,6 +24,7 @@ var app = express();
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'jade');
 
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

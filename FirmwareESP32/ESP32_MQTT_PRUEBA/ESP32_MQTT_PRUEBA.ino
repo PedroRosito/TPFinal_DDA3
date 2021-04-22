@@ -137,6 +137,9 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
 
+  // Configure pins of buttons and leds
+  pinMode(LED_ONBOARD, OUTPUT);
+
   dht.begin();
   
   mqttReconnectTimer = xTimerCreate("mqttTimer", pdMS_TO_TICKS(2000), pdFALSE, (void*)0, reinterpret_cast<TimerCallbackFunction_t>(connectToMqtt));

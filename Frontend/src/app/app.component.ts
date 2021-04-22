@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IMqttMessage, IPublishOptions, MqttService } from "ngx-mqtt";
+import { PartialObserver } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,16 @@ export class AppComponent {
 
   private options: IPublishOptions = {qos:1};
 
+  private observer: PartialObserver<void>;
+
   constructor(private mqttService: MqttService){}
 
   mqttPublish(message:string){
-    this.mqttService.publish("esp32/led/set",message,this.options);
+    this.mqttService.publish("esp32/led/set",message,this.options).subscribe(
+      (next)=>{console.log(next)},
+      (err)=>{console.log(err)}
+    );
   }
+
 
 }
