@@ -9,20 +9,4 @@ import { PartialObserver } from 'rxjs';
 })
 export class AppComponent {
 
-  title = 'Frontend';
-
-  private options: IPublishOptions = {qos:1};
-
-  private observer: PartialObserver<void>;
-
-  constructor(private mqttService: MqttService){}
-
-  mqttPublish(message:string){
-    this.mqttService.publish("esp32/led/set",message,this.options).subscribe(
-      (next)=>{console.log(next)},
-      (err)=>{console.log(err)}
-    );
-  }
-
-
 }
