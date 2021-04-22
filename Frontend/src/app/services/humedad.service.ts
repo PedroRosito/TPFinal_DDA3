@@ -11,7 +11,7 @@ export class HumedadService {
   constructor(private http: HttpClient) { }
 
   getData(){
-    return this.http.get('http://localhost:3000/humedad');
+    return this.http.get('http://localhost:3000/humidity');
   }
 
 }
