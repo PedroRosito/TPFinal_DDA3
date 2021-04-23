@@ -28,11 +28,10 @@ El siguiente proyecto se realizo en el marco de entrega como trabajo final de la
 
 ![Página Index](doc/schema.png)
 
-La aplicación capaz de mostrar datos de humedad y temperatura registrados por un sensor DHT22 conectado a un ESP32 comunicado con una base de datos en PostgreSQL a través del protocolo MQTT. La aplicación muestra los valores de humedad y temperatura almacenados en la base de datos en un grafico de lineas en una pagina web. Como funcionalidad adicional se agregaron dos botones que permiten controlar el led onboard del ESP32 a través de websockets directamente desde el Frontend del proyecto.
+La aplicación es capaz de mostrar datos de humedad y temperatura registrados por un sensor DHT22 conectado a un ESP32 que se comunica por mqtt sobre TCP con un broker mosquitto montado sobre una raspberry Pi. El broker a su vez se comunica con una API en nodejs/express la cuál se encarga de guardar los datos recibidos en una base de datos postgresql. Los datos obtenidos son mostrados en una página web desarrollada sobre Angular.
 
-El sensor toma un dato de temperatura y humedad cada 10 segundos, estos datos son publicados por el ESP32 a través del protocolo MQTT y son almacenados en una base datos PostgreSQL. El Backend desarrollado en Node y Express se suscribe a los tópicos MQTT y consulta los datos a la base de datos para mostrarlos en la pagina web desarrollada en Angular.
+Como funcionalidad adicional se agregaron dos botones que permiten controlar el led onboard del ESP32 a través de websockets directamente desde el Frontend del proyecto.
 
-La funcionalidad de encendido y apagado del led Onboard del ESP32 utiliza websockets para enviar el comando "on/off". Se genero un tópico nuevo para enviar los comandos y recibir el estado actual del led
 
 ## Herramientas
 
@@ -84,15 +83,22 @@ Puertos necesarios:
 ## Configuración
 
 * [Arduino IDE](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/)
-* [Firmware](https://randomnerdtutorials.com/esp32-mqtt-publish-dht11-dht22-arduino/) Para el cargado del firmware en el ESP32
+* [Firmware](https://randomnerdtutorials.com/esp32-mqtt-publish-dht11-dht22-arduino/) Para el cargado del firmware en el ESP32 (se debe utilizar el firmware incluído en este repositorio) <br>
+Dentro del archivo ESP32_MQTT_PRUEBA.ino setear los siguientes defines con los datos adecuados: <br>
+WIFI_SSID, WIFI_PASSWORD, MQTT_HOST IPAddress(192, 168, xxx, xxx)
+
 * [mosquitto](https://medium.com/@anant.lalchandani/dead-simple-mqtt-example-over-websockets-in-angular-b9fd5ff17b8e) para generar el listening de websockets.
-* Creación de base de datos PostgreSQL en pgAdmin4: Hay que correr los comandos SQL en el archivo existente en dumpSQL para crear el esquema de la bases de datos. La base debe estar online durante la ejecución del proyecto.
+* Creación de base de datos PostgreSQL en pgAdmin4: Hay que correr los comandos SQL en el archivo existente en dumpSQL para crear el esquema de la base de datos. La base debe estar online durante la ejecución del proyecto.
+* Comunicación entre el backend y la base de datos: Modificar las siguientes variables en Backend/postgreSQL/postgreHandler.js con sus datos: 
+user, database, password
 
 ## Ejecución
 
-Habiendo completada la descarga y configuración de las herramientas, el primer paso es realizar todas las conexiones del sensor DHT22 con el ESP32 como se indica en la siguiente imagen:
+Habiendo completado la descarga y configuración de las herramientas, el primer paso es realizar todas las conexiones del sensor DHT22 con el ESP32 como se indica en la siguiente imagen:
 
 ![Página Index](doc/conexion.png)
+
+Una vez realizadas las conexiones cargar el firmware en el ESP32 como se especifica en [Configuración](#Configuración).
 
 Luego conectar la Rasberry y asegurarse de tener el servicio de mosquitto corriendo ejecutando el siguiente comando:
 ```
