@@ -130,13 +130,11 @@ ng serve
 
 Si todo se ejecuta correctamente en el navegador abrir http://localhost:4200/ y debería verse el index de la pagina, que por defecto muestra la tabla con los valores de temperatura medidos y almacenados en la base de datos. 
 
-![Página Index](doc/IndexCaptura.png)
+![Página Index](doc/index.png)
 
 ## Funcionalidad
 
 La pagina muestra por defecto el grafico de los valores de temperatura almacenados en la base de datos, pero con las pestañas "Temperatura" y "Humedad" se puede seleccionar que grafica visualizar. Ademas, se puede controlar el estado del led Onboard del ESP32 con los botones "On/Off" disponibles en la pagina.
-
-![Página Index](doc/CapturaIndex.png)
 
 ## Finalización
 Para terminar la ejecución, ir a los terminales y simplemente teclear Ctrl+C en ambos; cerrar la base de datos y desconectar todos los componentes. 
