@@ -58,7 +58,7 @@ export class LineChartComponent implements OnInit{
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
     console.log('Estoy en updateData');
-    this.temperatura.getData().subscribe(
+    this.temperatura.getData().then(
       (data)=>{
        // this.lineChartData[0].data.push(data.valor)
        var length = data['rows'].length;
@@ -77,7 +77,7 @@ export class LineChartComponent implements OnInit{
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
     console.log('Estoy en updateData');
-    this.humedad.getData().subscribe(
+    this.humedad.getData().then(
       (data)=>{
        // this.lineChartData[0].data.push(data.valor)
        var length = data['rows'].length;

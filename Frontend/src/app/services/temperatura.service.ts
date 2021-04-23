@@ -11,7 +11,7 @@ export class TemperaturaService {
   constructor(private http: HttpClient) { }
 
    getData(){
-     return this.http.get('http://localhost:3000/temperature');
+     return this.http.get('http://localhost:3000/temperature').toPromise();
    }
 
 
